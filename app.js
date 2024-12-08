@@ -1,5 +1,8 @@
 import express, { json } from 'express';
+import sequelize from './config/database.js';
 const app = express();
+import Alumno from './models/alumno.js';
+import Profesor from './models/profesor.js';
 
 // Middlewares
 app.use(json());
@@ -21,4 +24,17 @@ const PORT = process.env.PORT || 80;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexión a la base de datos establecida.');
+
+    // Sincronizar todas las tablas
+    await sequelize.sync({ force: false }); // Cambia `force` a `true` si quieres reiniciar tablas (cuidado con pérdida de datos)
+    console.log('Tablas sincronizadas correctamente.');
+  } catch (error) {
+    console.error('Error al sincronizar las tablas:', error);
+  }
+})();
 
