@@ -1,9 +1,9 @@
 import Alumno from '../models/alumno.js';
 import { PutObjectCommand } from '@aws-sdk/client-s3';
-import s3Client from '../config/awsConfig.js'; 
+import s3Client from '../config/s3Config.js'; 
 import { PublishCommand } from "@aws-sdk/client-sns";
 import snsClient from "../config/snsConfig.js";
-import { PutItemCommand, QueryCommand , UpdateItemCommand, ScanCommand  } from "@aws-sdk/client-dynamodb";
+import { PutItemCommand, UpdateItemCommand, ScanCommand  } from "@aws-sdk/client-dynamodb";
 import { v4 as uuidv4 } from "uuid";
 import dynamoClient from "../config/dynamoConfig.js";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
